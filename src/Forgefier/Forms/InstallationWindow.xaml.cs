@@ -195,11 +195,21 @@ namespace Forgefier
 
                         File.Copy(Path.Combine(originDir, _mcForgeVersion.McVersion + ".jar"),
                             Path.Combine(destDir, _customVersionId + ".jar"));
+
+                        using (ZipFile zipJar = ZipFile.Read(Path.Combine(destDir, _customVersionId + ".jar"))) {
+                            AppendLog(" Removing META-INF...");
+                            zipJar.RemoveSelectedEntries("META-INF/*");
+                            zipJar.Save();
+                        }
+                        JObject jo = JObject.Parse(File.ReadAllText(Path.Combine(originDir, _mcForgeVersion.McVersion + ".json")));
+                        foreach (JObject obj in jo["libraries"]) {
+                            (jobject["versionInfo"]["libraries"] as JArray).Add(obj);
+                        }
                     }
 
                     IncreaseProgressValue();
 
-                    AppendLog("Creating custom version JSON...");
+                    AppendLog("Creating custom manifest...");
                     File.WriteAllText(versionJson, jobject["versionInfo"].ToString(Formatting.Indented));
 
                     IncreaseProgressValue();
@@ -254,7 +264,7 @@ namespace Forgefier
                 Directory.CreateDirectory(path);
             }
 
-            AppendLog($"Validating version `{version}`...");
+            AppendLog($"Validating files for Minecraft {version}...");
 
             if (!File.Exists($@"{path}\{version}.json")) {
                 RawVersionListManifest versionList =
