@@ -115,7 +115,8 @@ namespace Forgefier
                                 continue;
                             }
 
-                            window.ComboBoxForgeVersions.Items.Add(tuple.Item2);
+                            window.ComboBoxForgeVersions.Items.Add(list[tuple.Item2.McVersion]
+                                .First(i => i.Version == tuple.Item2.Version));
                         }
                     }
                 }

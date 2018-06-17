@@ -19,7 +19,14 @@ namespace Forgefier
             TextBoxPath.Select(TextBoxPath.Text.Length, 0);
             ComboBoxLanguage.Items.Add("EN");
             ComboBoxLanguage.Items.Add("RU");
-            ComboBoxLanguage.SelectedIndex = 0;
+
+            int index = 0;
+            if (ComboBoxLanguage.Items.Contains(
+                CultureInfo.InstalledUICulture.TwoLetterISOLanguageName.ToUpperInvariant())) {
+                index = ComboBoxLanguage.Items.IndexOf(CultureInfo.InstalledUICulture.TwoLetterISOLanguageName.ToUpperInvariant());
+            }
+
+            ComboBoxLanguage.SelectedIndex = index;
             Title = $"{Application.ResourceAssembly.GetName().Name} {Application.ResourceAssembly.GetName().Version}";
         }
 

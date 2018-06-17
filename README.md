@@ -14,7 +14,6 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 
 ## Known Issues
 
-- Installing Promo (`latest`, `recommended`) version will fail, if Forge build has any tag;
 - Some legacy versions should be patched with `ModLoader` before Forge installation.
 
 ## Building
