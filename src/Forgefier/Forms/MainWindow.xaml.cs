@@ -3,6 +3,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Forms;
+using Application = System.Windows.Application;
 
 namespace Forgefier
 {
@@ -77,15 +79,15 @@ namespace Forgefier
             ResourceDictionary dict = new ResourceDictionary();
             switch (cultureInfo.Name) {
                 case "ru-RU":
-                    dict.Source = new Uri($"Resources/localization_strings.{cultureInfo.Name}.xaml", UriKind.Relative);
+                    dict.Source = new Uri($"Localizations/strings.{cultureInfo.Name}.xaml", UriKind.Relative);
                     break;
                 default:
-                    dict.Source = new Uri("Resources/localization_strings.xaml", UriKind.Relative);
+                    dict.Source = new Uri("Localizations/strings.xaml", UriKind.Relative);
                     break;
             }
 
             ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
-                where d.Source != null && d.Source.OriginalString.StartsWith("Resources/localization_strings.")
+                where d.Source != null && d.Source.OriginalString.StartsWith("Localizations/strings.")
                 select d).First();
             if (oldDict != null) {
                 int index = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
@@ -102,6 +104,21 @@ namespace Forgefier
             ButtonInstall.IsEnabled = false;
             new InstallationWindow(TextBoxPath.Text, mcForgeVersion, TextBoxCustomVersionId.Text, TextBoxCustomProfileName.Text).ShowDialog();
             ButtonInstall.IsEnabled = true;
+        }
+
+        private void ButtonBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog =
+                new FolderBrowserDialog {
+                    Description = string.Format(FindResource("r_SelectFolderMessage").ToString()),
+                    ShowNewFolderButton = false
+                };
+            DialogResult dialogResult = dialog.ShowDialog();
+            if (dialogResult != System.Windows.Forms.DialogResult.OK) {
+                return;
+            }
+
+            TextBoxPath.Text = dialog.SelectedPath;
         }
     }
 }

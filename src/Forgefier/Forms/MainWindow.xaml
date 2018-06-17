@@ -13,7 +13,7 @@
         <Button x:Name="ButtonInstall" Content="{DynamicResource r_ButtonInstall}" Margin="100,0,100,10" Height="32" VerticalAlignment="Bottom" Click="ButtonInstall_Click"/>
         <Label x:Name="LabelMinecraftDirectory" Content="{DynamicResource r_LabelMinecraftDirectory}" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.012,0.578" Width="164"/>
         <TextBox x:Name="TextBoxPath" HorizontalAlignment="Left" Height="23" Margin="179,101,0,0" VerticalAlignment="Top" Width="168" MaxLines="1"/>
-        <Button x:Name="ButtonBrowse" Content="..." HorizontalAlignment="Left" Height="23" Margin="352,101,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.519,0.721"/>
+        <Button x:Name="ButtonBrowse" Content="..." HorizontalAlignment="Left" Height="23" Margin="352,101,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.519,0.721" Click="ButtonBrowse_Click"/>
         <Expander x:Name="ExpanderExtendedOptions" Header="{DynamicResource r_ExpanderExtendedOptions}" HorizontalAlignment="Left" Height="30" Margin="10,129,0,0" VerticalAlignment="Top" Width="382" Expanded="ExpanderExtendedOptions_Expanded" Collapsed="ExpanderExtendedOptions_Collapsed">
             <Grid x:Name="GridExtendedOptions" Background="#FFE5E5E5">
                 <CheckBox x:Name="CheckBoxCustomVersionId" Content="{DynamicResource r_CheckBoxCustomVersionId}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,11,0,0" Width="152" Unchecked="CheckBoxCustomVersionId_CheckChanged" Checked="CheckBoxCustomVersionId_CheckChanged"/>

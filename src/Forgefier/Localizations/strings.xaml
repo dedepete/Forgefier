@@ -17,6 +17,7 @@
     <v:String x:Key="r_LabelMinecraftDirectory">Minecraft directory:</v:String>
     
     <!-- Messages -->
+    <v:String x:Key="r_SelectFolderMessage" xml:space="preserve">Select Minecraft directory.&#x0d;&#x0a;It should contain launcher_profiles.json.</v:String>
     <v:String x:Key="r_MessageSuccess">Sucessfully installed Forge {0} for Minecraft {1}!</v:String>
 
     <!-- Titles -->
