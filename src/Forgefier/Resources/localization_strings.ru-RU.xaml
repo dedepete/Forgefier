@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- Buttons -->
+    <v:String x:Key="r_ButtonInstall">Установить</v:String>
+    
+    <!-- CheckBoxes -->
+    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Отобр. другие версии (некоторые могут быть нестабильными)</v:String>
+    <v:String x:Key="r_CheckBoxCustomVersionId">Польз. ID версии:</v:String>
+    <v:String x:Key="r_CheckBoxCustomProfileName">Польз. название профиля:</v:String>
+    
+    <!-- Expanders -->
+    <v:String x:Key="r_ExpanderExtendedOptions">Расширенные настройки</v:String>
+    
+    <!-- Labels -->
+    <v:String x:Key="r_LabelIntro">Эта небольшая утилита поможет вам установить Minecraft Forge.</v:String>
+    <v:String x:Key="r_LabelMinecraftDirectory">Директория Minecraft:</v:String>
+
+    <!-- Messages -->
+    <v:String x:Key="r_MessageSuccess">Forge версии {0} успешно установлен для Minecraft {1}!</v:String>
+
+    <!-- Titles -->
+    <v:String x:Key="r_TitleInstallation">Установка Minecraft Forge</v:String>
+    <v:String x:Key="r_TitleDone">Готово!</v:String>
+</ResourceDictionary>

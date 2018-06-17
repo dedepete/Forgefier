@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+    <!-- Buttons -->
+    <v:String x:Key="r_ButtonInstall">Install</v:String>
+    
+    <!-- CheckBoxes -->
+    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Display other versions (some can be unstable)</v:String>
+    <v:String x:Key="r_CheckBoxCustomVersionId">Custom version ID:</v:String>
+    <v:String x:Key="r_CheckBoxCustomProfileName">Custom profile name:</v:String>
+    
+    <!-- Expanders -->
+    <v:String x:Key="r_ExpanderExtendedOptions">Extended options</v:String>
+    
+    <!-- Labels -->
+    <v:String x:Key="r_LabelIntro">This small tool will help you to install Minecraft Forge.</v:String>
+    <v:String x:Key="r_LabelMinecraftDirectory">Minecraft directory:</v:String>
+    
+    <!-- Messages -->
+    <v:String x:Key="r_MessageSuccess">Sucessfully installed Forge {0} for Minecraft {1}!</v:String>
+
+    <!-- Titles -->
+    <v:String x:Key="r_TitleInstallation">Installing Minecraft Forge</v:String>
+    <v:String x:Key="r_TitleDone">Done!</v:String>
+</ResourceDictionary>
