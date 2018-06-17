@@ -42,7 +42,10 @@ namespace Forgefier
 
             foreach (XmlNode node in document.SelectNodes("metadata")) {
                 foreach (XmlNode child in node.ChildNodes) {
-                    if (child.Name != "versioning") continue;
+                    if (child.Name != "versioning") {
+                        continue;
+                    }
+
                     foreach (XmlNode node2 in child.SelectNodes("versions")) {
                         foreach (XmlNode child2 in node2.ChildNodes) {
                             McForgeVersion mcForgeVersion = new McForgeVersion(child2.InnerText);

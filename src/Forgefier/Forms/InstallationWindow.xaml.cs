@@ -313,7 +313,9 @@ namespace Forgefier
             }
 
             foreach (DownloadEntry entry in libsToDownload.Keys) {
-                if (File.Exists(_mcLibs + @"\" + entry.Path)) continue;
+                if (File.Exists(_mcLibs + @"\" + entry.Path)) {
+                    continue;
+                }
                 AppendLog($"Processing {entry.Path}...");
                 string directory = Path.GetDirectoryName(_mcLibs + @"\" + entry.Path);
                 if (!File.Exists(directory)) {

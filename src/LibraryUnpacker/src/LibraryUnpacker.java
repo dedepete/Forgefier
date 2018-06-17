@@ -55,8 +55,6 @@ public class LibraryUnpacker {
         OutputStream out = new FileOutputStream(temp);
         out.write(decompressed, 0, decompressed.length - len - 8);
         out.close();
-        decompressed = null;
-        data = null;
         System.gc();
 
         FileOutputStream jarBytes = new FileOutputStream(output);
