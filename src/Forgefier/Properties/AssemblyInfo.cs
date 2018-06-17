@@ -7,11 +7,11 @@ using System.Windows;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Forgefier")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Minecraft Forge installer, written in C#.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Igor Popov")]
 [assembly: AssemblyProduct("Forgefier")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright Igor Popov© 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -50,7 +50,7 @@ using System.Windows;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1.0.307")]
-[assembly: AssemblyFileVersion("0.1.0.307")]
+[assembly: AssemblyVersion("0.1.0.309")]
+[assembly: AssemblyFileVersion("0.1.0.309")]
 [assembly: NeutralResourcesLanguage("en")]
 

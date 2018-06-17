@@ -95,6 +95,7 @@ namespace Forgefier
         private void BeginInstallation()
         {
             try {
+                SetProgressMax(_mcForgeVersion.InstallationMethod == McForgeInstallationType.LEGACY ? 6 : 7);
                 string mcVersions = _mcDirectory + "/versions/",
                     destDir = Path.Combine(mcVersions, _customVersionId + @"\"),
                     originDir = Path.Combine(mcVersions, _mcForgeVersion.McVersion + @"\");
@@ -105,8 +106,9 @@ namespace Forgefier
                     Directory.CreateDirectory(destDir);
                 }
 
+                IncreaseProgressValue();
+
                 if (_mcForgeVersion.InstallationMethod == McForgeInstallationType.LEGACY) {
-                    SetProgressMax(5);
                     AppendLog("Installing Forge for LEGACY version...");
                     AppendLog("Downloading Forge...");
                     _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "temp.zip"));
@@ -158,7 +160,6 @@ namespace Forgefier
                 }
 
                 if (_mcForgeVersion.InstallationMethod == McForgeInstallationType.INSTALLER) {
-                    SetProgressMax(6);
                     AppendLog("Installing Forge for version with INSTALLER...");
                     AppendLog("Downloading Forge...");
                     _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "installer.zip"));
@@ -201,6 +202,7 @@ namespace Forgefier
                             zipJar.RemoveSelectedEntries("META-INF/*");
                             zipJar.Save();
                         }
+
                         JObject jo = JObject.Parse(File.ReadAllText(Path.Combine(originDir, _mcForgeVersion.McVersion + ".json")));
                         foreach (JObject obj in jo["libraries"]) {
                             (jobject["versionInfo"]["libraries"] as JArray).Add(obj);
@@ -231,6 +233,7 @@ namespace Forgefier
                 IncreaseProgressValue();
                 AppendLog("Updating launcher profiles...");
                 JObject profiles = JObject.Parse(File.ReadAllText(_mcDirectory + "/launcher_profiles.json"));
+                profiles["selectedProfile"] = _customProfileName;
                 if (profiles["profiles"][_customProfileName] != null) {
                     profiles["profiles"][_customProfileName]["lastVersionId"] = _customVersionId;
                 } else {
@@ -245,7 +248,9 @@ namespace Forgefier
                 IncreaseProgressValue();
                 SetExitState(true);
                 Dispatcher.Invoke(() => {
-                    MessageBox.Show(this, string.Format(FindResource("r_MessageSuccess").ToString(), _mcForgeVersion.VersionWithTag, _mcForgeVersion.McVersion), FindResource("r_TitleDone").ToString(), MessageBoxButton.OK,
+                    MessageBox.Show(this,
+                        string.Format(FindResource("r_MessageSuccess").ToString(), _mcForgeVersion.VersionWithTag, _mcForgeVersion.McVersion),
+                        FindResource("r_TitleDone").ToString(), MessageBoxButton.OK,
                         MessageBoxImage.Information);
                     Close();
                 });
