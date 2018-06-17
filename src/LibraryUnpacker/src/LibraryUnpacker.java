@@ -3,19 +3,14 @@ package ru.dedepete.forgefier;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.jar.JarEntry;
-import java.util.jar.JarInputStream;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Pack200;
 
@@ -38,10 +33,8 @@ public class LibraryUnpacker {
 
         byte[] decompressed = LibraryUnpacker.readFully(new XZInputStream(new ByteArrayInputStream(data)));
 
-        //Snag the checksum signature
         String end = new String(decompressed, decompressed.length - 4, 4);
-        if (!end.equals("SIGN"))
-        {
+        if (!"SIGN".equals(end)) {
             System.out.println("Unpacking failed, signature missing " + end);
             return;
         }

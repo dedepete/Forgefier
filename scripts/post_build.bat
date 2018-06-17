@@ -27,6 +27,7 @@ ECHO # Copying LibraryUnpacker into "\ForgefierData\unpacker\"...
 COPY /Y LibraryUnpacker.jar "%TARGETDIR%\ForgefierData\unpacker\"
 COPY /Y unpack.bat "%TARGETDIR%\ForgefierData\unpacker\"
 COPY /Y .\classpath\xz-1.8.jar "%TARGETDIR%\ForgefierData\unpacker\"
+DEL /Q LibraryUnpacker.jar
 
 ECHO # Finished executing "post_build.bat".
 
