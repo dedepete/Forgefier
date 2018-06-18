@@ -65,10 +65,10 @@ namespace Forgefier
 
         private void ComboBoxLanguage_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            CultureInfo cultureInfo = new CultureInfo("en-EN");
+            CultureInfo cultureInfo = new CultureInfo("en");
             switch (ComboBoxLanguage.SelectedIndex) {
                 case 0:
-                    cultureInfo = new CultureInfo("en-EN");
+                    cultureInfo = new CultureInfo("en");
                     break;
                 case 1:
                     cultureInfo = new CultureInfo("ru-RU");

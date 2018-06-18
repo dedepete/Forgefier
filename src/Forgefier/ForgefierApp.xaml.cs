@@ -137,6 +137,7 @@ namespace Forgefier
                         versions.Add(tuple.Item1);
                     }
                 }
+
                 versions.Sort();
 
                 window.СomboBoxPromo.ItemsSource = versions;
