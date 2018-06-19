@@ -34,7 +34,7 @@ namespace Forgefier
 
         private void ExpanderExtendedOptions_Expanded(object sender, RoutedEventArgs e)
         {
-            ExpanderExtendedOptions.Height = 83;
+            ExpanderExtendedOptions.Height = 90;
             Height += ExpanderExtendedOptions.Height - 33;
         }
 
@@ -76,25 +76,38 @@ namespace Forgefier
 
             }
 
-            ResourceDictionary dict = new ResourceDictionary();
+            ResourceDictionary dictionary = new ResourceDictionary();
             switch (cultureInfo.Name) {
                 case "ru-RU":
-                    dict.Source = new Uri($"Localizations/strings.{cultureInfo.Name}.xaml", UriKind.Relative);
+                    dictionary.Source = new Uri($"Localizations/strings.{cultureInfo.Name}.xaml", UriKind.Relative);
                     break;
                 default:
-                    dict.Source = new Uri("Localizations/strings.xaml", UriKind.Relative);
+                    dictionary.Source = new Uri("Localizations/strings.xaml", UriKind.Relative);
                     break;
             }
 
-            ResourceDictionary oldDict = (from d in Application.Current.Resources.MergedDictionaries
+            if (dictionary.Source != new Uri("Localizations/strings.xaml", UriKind.Relative)) {
+                ResourceDictionary originalDictionary = new ResourceDictionary {
+                    Source = new Uri("Localizations/strings.xaml", UriKind.Relative)
+                };
+                if (dictionary.Keys.Count != originalDictionary.Keys.Count) {
+                    foreach (string key in originalDictionary.Keys) {
+                        if (!dictionary.Contains(key)) {
+                            dictionary.Add(key, originalDictionary[key]);
+                        }
+                    }
+                }
+            }
+
+            ResourceDictionary oldDictionary = (from d in Application.Current.Resources.MergedDictionaries
                 where d.Source != null && d.Source.OriginalString.StartsWith("Localizations/strings.")
                 select d).First();
-            if (oldDict != null) {
-                int index = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
-                Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-                Application.Current.Resources.MergedDictionaries.Insert(index, dict);
+            if (oldDictionary != null) {
+                int index = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(index, dictionary);
             } else {
-                Application.Current.Resources.MergedDictionaries.Add(dict);
+                Application.Current.Resources.MergedDictionaries.Add(dictionary);
             }
         }
 
@@ -110,7 +123,7 @@ namespace Forgefier
         {
             FolderBrowserDialog dialog =
                 new FolderBrowserDialog {
-                    Description = string.Format(FindResource("r_SelectFolderMessage").ToString()),
+                    Description = string.Format(FindResource("r_MessageSelectFolder").ToString()),
                     ShowNewFolderButton = false
                 };
             DialogResult dialogResult = dialog.ShowDialog();

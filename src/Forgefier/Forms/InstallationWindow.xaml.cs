@@ -62,6 +62,16 @@ namespace Forgefier
             TextBox.ScrollToEnd();
         }
 
+        private void SetStatusLabel(string text)
+        {
+            if (!Dispatcher.CheckAccess()) {
+                Dispatcher.Invoke(new StringMethodInvoker(SetStatusLabel), text);
+                return;
+            }
+
+            Label.Content = text;
+        }
+
         private void SetExitState(bool allow)
         {
             if (!Dispatcher.CheckAccess()) {
@@ -111,9 +121,11 @@ namespace Forgefier
                 if (_mcForgeVersion.InstallationMethod == McForgeInstallationType.LEGACY) {
                     AppendLog("Installing Forge for LEGACY version...");
                     AppendLog("Downloading Forge...");
+                    SetStatusLabel(FindResource("r_LabelStatusDownloadingForge").ToString());
                     _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "temp.zip"));
 
                     AppendLog($"Creating custom `{_customVersionId}` version from `{_mcForgeVersion.McVersion}`...");
+                    SetStatusLabel(FindResource("r_LabelStatusCreatingVersion").ToString());
                     if (File.Exists(versionJar)) {
                         File.Delete(versionJar);
                     }
@@ -131,7 +143,8 @@ namespace Forgefier
                     File.Copy(Path.Combine(originDir, _mcForgeVersion.McVersion + ".json"), Path.Combine(destDir, _customVersionId + ".json"));
 
                     IncreaseProgressValue();
-                    AppendLog("Pathing JAR...");
+                    AppendLog("Patching JAR...");
+                    SetStatusLabel(FindResource("r_LabelStatusPatchingJar").ToString());
                     using (ZipFile zip = ZipFile.Read(Path.Combine(destDir, "temp.zip"))) {
                         using (ZipFile zipVersion = ZipFile.Read(Path.Combine(destDir, _customVersionId + ".jar"))) {
                             foreach (ZipEntry entry in zip) {
@@ -151,7 +164,8 @@ namespace Forgefier
                     }
 
                     IncreaseProgressValue();
-                    AppendLog($"Pathing `{_customVersionId}`.json...");
+                    AppendLog("Patching JSON...");
+                    SetStatusLabel(FindResource("r_LabelStatusPatchingJson").ToString());
                     JObject jo = JObject.Parse(File.ReadAllText(Path.Combine(destDir, _customVersionId + ".json")));
                     jo["id"] = _customVersionId;
                     File.WriteAllText(Path.Combine(destDir, _customVersionId + ".json"), jo.ToString(Formatting.Indented));
@@ -162,10 +176,12 @@ namespace Forgefier
                 if (_mcForgeVersion.InstallationMethod == McForgeInstallationType.INSTALLER) {
                     AppendLog("Installing Forge for version with INSTALLER...");
                     AppendLog("Downloading Forge...");
+                    SetStatusLabel(FindResource("r_LabelStatusDownloadingForge").ToString());
                     _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "installer.zip"));
                     IncreaseProgressValue();
                     JObject jobject = new JObject();
                     AppendLog("Processing installer...");
+                    SetStatusLabel(FindResource("r_LabelStatusProcessingInstaller").ToString());
                     using (ZipFile zipInstaller = ZipFile.Read(Path.Combine(destDir, "installer.zip"))) {
                         foreach (ZipEntry entry in zipInstaller) {
                             if (entry.FileName == "install_profile.json") {
@@ -179,7 +195,7 @@ namespace Forgefier
                             }
 
                             if (entry.FileName.Contains(".jar")) {
-                                AppendLog(" Found Forge universal. Copying...");
+                                AppendLog(" Found Forge-universal.jar. Copying...");
                                 entry.Extract(destDir, ExtractExistingFileAction.OverwriteSilently);
                             }
                         }
@@ -190,6 +206,7 @@ namespace Forgefier
                     jobject["versionInfo"]["id"] = _customVersionId;
                     if (jobject["versionInfo"]["inheritsFrom"] == null) {
                         AppendLog("Inheritable version not setted. Copying original JAR...");
+                        SetStatusLabel(FindResource("r_LabelStatusPatchingJar").ToString());
                         if (File.Exists(versionJar)) {
                             File.Delete(versionJar);
                         }
@@ -203,6 +220,7 @@ namespace Forgefier
                             zipJar.Save();
                         }
 
+                        SetStatusLabel(FindResource("r_LabelStatusPatchingJson").ToString());
                         JObject jo = JObject.Parse(File.ReadAllText(Path.Combine(originDir, _mcForgeVersion.McVersion + ".json")));
                         foreach (JObject obj in jo["libraries"]) {
                             (jobject["versionInfo"]["libraries"] as JArray).Add(obj);
@@ -212,6 +230,7 @@ namespace Forgefier
                     IncreaseProgressValue();
 
                     AppendLog("Creating custom manifest...");
+                    SetStatusLabel(FindResource("r_LabelStatusCreatingManifest").ToString());
                     File.WriteAllText(versionJson, jobject["versionInfo"].ToString(Formatting.Indented));
 
                     IncreaseProgressValue();
@@ -222,7 +241,8 @@ namespace Forgefier
                         Directory.CreateDirectory(new FileInfo(_mcLibs + forgeUniversal.GetPath()).DirectoryName);
                     }
 
-                    AppendLog("Copying Forge universal into libraries...");
+                    AppendLog("Copying Universal into libraries...");
+                    SetStatusLabel(FindResource("r_LabelStatusCopyingUniversal").ToString());
                     File.Copy(Path.Combine(destDir, jobject["install"]["filePath"].ToString()),
                         _mcLibs + forgeUniversal.GetPath(), true);
                     File.Delete(Path.Combine(destDir, jobject["install"]["filePath"].ToString()));
@@ -231,7 +251,8 @@ namespace Forgefier
                 }
 
                 IncreaseProgressValue();
-                AppendLog("Updating launcher profiles...");
+                AppendLog("Updating profiles...");
+                SetStatusLabel(FindResource("r_LabelStatusUpdatingProfiles").ToString());
                 JObject profiles = JObject.Parse(File.ReadAllText(_mcDirectory + "/launcher_profiles.json"));
                 profiles["selectedProfile"] = _customProfileName;
                 if (profiles["profiles"][_customProfileName] != null) {
@@ -245,6 +266,7 @@ namespace Forgefier
 
                 File.WriteAllText(_mcDirectory + "/launcher_profiles.json", profiles.ToString(Formatting.Indented));
                 AppendLog("Done!");
+                SetStatusLabel(FindResource("r_LabelStatusDone").ToString());
                 IncreaseProgressValue();
                 SetExitState(true);
                 Dispatcher.Invoke(() => {
@@ -258,6 +280,7 @@ namespace Forgefier
             }
             catch (Exception exeption) {
                 AppendLog($"An exception has occured: \n{exeption}");
+                SetStatusLabel(FindResource("r_LabelStatusException").ToString());
                 SetExitState(true);
             }
         }
@@ -270,6 +293,7 @@ namespace Forgefier
             }
 
             AppendLog($"Validating files for Minecraft {version}...");
+            SetStatusLabel(FindResource("r_LabelStatusValidatingVersion").ToString());
 
             if (!File.Exists($@"{path}\{version}.json")) {
                 RawVersionListManifest versionList =
@@ -303,6 +327,7 @@ namespace Forgefier
                 new DirectoryInfo(_mcVersions + @"\" + version));
             Dictionary<DownloadEntry, bool> libsToDownload = new Dictionary<DownloadEntry, bool>();
             AppendLog("Validating libraries...");
+            SetStatusLabel(FindResource("r_LabelStatusValidatingLibraries").ToString());
             foreach (Lib a in selectedVersionManifest.Libs) {
                 if (!a.IsForWindows()) {
                     continue;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Windows;
 using System.Xml;
 
 namespace Forgefier
@@ -26,6 +27,12 @@ namespace Forgefier
             // http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions.json
             // http://files.minecraftforge.net/maven/net/minecraftforge/forge/promotions_slim.json
             // https://files.minecraftforge.net/maven/net/minecraftforge/forge/maven-metadata.xml
+
+            if (!CheckForInternetConnection()) {
+                MessageBox.Show(window.FindResource("r_MessageNoInternet").ToString(), window.FindResource("r_TitleError").ToString(), MessageBoxButton.OK,
+                    MessageBoxImage.Exclamation);
+                return;
+            }
 
             WebClient wc = new WebClient();
             string xml =
@@ -146,5 +153,20 @@ namespace Forgefier
             window.CheckBoxDisplayOtherVersions.IsChecked = false;
             app.Run(window);
         }
+
+        private static bool CheckForInternetConnection()
+        {
+            try {
+                using (WebClient client = new WebClient()) {
+                    using (client.OpenRead("https://captive.apple.com/generate_204")) {
+                        return true;
+                    }
+                }
+            }
+            catch {
+                return false;
+            }
+        }
     }
+
 }

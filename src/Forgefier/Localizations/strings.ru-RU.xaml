@@ -5,9 +5,9 @@
     <v:String x:Key="r_ButtonInstall">Установить</v:String>
     
     <!-- CheckBoxes -->
-    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Отобр. другие версии (некоторые могут быть нестабильными)</v:String>
-    <v:String x:Key="r_CheckBoxCustomVersionId">Польз. ID версии:</v:String>
     <v:String x:Key="r_CheckBoxCustomProfileName">Польз. назв. профиля:</v:String>
+    <v:String x:Key="r_CheckBoxCustomVersionId">Польз. ID версии:</v:String>
+    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Отобр. другие версии (некоторые могут быть нестабильными)</v:String>
     
     <!-- Expanders -->
     <v:String x:Key="r_ExpanderExtendedOptions">Расширенные настройки</v:String>
@@ -16,11 +16,27 @@
     <v:String x:Key="r_LabelIntro">Эта небольшая утилита поможет вам установить Minecraft Forge.</v:String>
     <v:String x:Key="r_LabelMinecraftDirectory">Директория Minecraft:</v:String>
 
+        <!-- Installation Statuses -->
+    <v:String x:Key="r_LabelStatusCopyingUniversal">Копирование Universal в библиотеки...</v:String>
+    <v:String x:Key="r_LabelStatusCreatingManifest">Создание пользовательского манифеста...</v:String>
+    <v:String x:Key="r_LabelStatusCreatingVersion">Создание пользовательской версии...</v:String>
+    <v:String x:Key="r_LabelStatusDone">Готово!</v:String>
+    <v:String x:Key="r_LabelStatusDownloadingForge">Загрузка Forge...</v:String>
+    <v:String x:Key="r_LabelStatusException">Возникло исключение! См. логи для доп. информации. Установка прервана!</v:String>
+    <v:String x:Key="r_LabelStatusPatchingJar">Патчинг JAR...</v:String>
+    <v:String x:Key="r_LabelStatusPatchingJson">Патчинг JSON...</v:String>
+    <v:String x:Key="r_LabelStatusProcessingInstaller">Обработка установщика...</v:String>
+    <v:String x:Key="r_LabelStatusUpdatingProfiles">Обновление профилей...</v:String>
+    <v:String x:Key="r_LabelStatusValidatingLibraries">Проверка библиотек...</v:String>
+    <v:String x:Key="r_LabelStatusValidatingVersion">Проверка файлов Minecraft...</v:String>
+
     <!-- Messages -->
-    <v:String x:Key="r_SelectFolderMessage" xml:space="preserve">Выберите папку с Minecraft.&#x0d;&#x0a;Она должна содержать файл launcher_profiles.json.</v:String>
+    <v:String x:Key="r_MessageNoInternet" xml:space="preserve">Не удалось установить соединение с Интернетом!&#x0d;&#x0a;Пожалуйста, проверьте свою конфигурацию сети и перезапустите программу.</v:String>
     <v:String x:Key="r_MessageSuccess">Forge версии {0} успешно установлен для Minecraft {1}!</v:String>
+    <v:String x:Key="r_SelectFolderMessage" xml:space="preserve">Выберите папку с Minecraft.&#x0d;&#x0a;Она должна содержать файл launcher_profiles.json.</v:String>
 
     <!-- Titles -->
-    <v:String x:Key="r_TitleInstallation">Установка Minecraft Forge</v:String>
     <v:String x:Key="r_TitleDone">Готово!</v:String>
+    <v:String x:Key="r_TitleError">Ошибка!</v:String>
+    <v:String x:Key="r_TitleInstallation">Установка Minecraft Forge</v:String>
 </ResourceDictionary>

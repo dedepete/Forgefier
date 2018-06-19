@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{DynamicResource r_TitleInstallation}" Height="331.985" Width="657.353" ResizeMode="CanMinimize" WindowStyle="ToolWindow" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="{DynamicResource r_TitleInstallation}" Height="331" Width="657" ResizeMode="CanMinimize" WindowStyle="ToolWindow" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="244" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="629" IsReadOnly="True" IsUndoEnabled="False" FontFamily="Consolas"/>
-        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="32" Margin="10,259,0,0" VerticalAlignment="Top" Width="629"/>
+        <TextBox x:Name="TextBox" HorizontalAlignment="Left" Height="244" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="621" IsReadOnly="True" IsUndoEnabled="False" FontFamily="Consolas"/>
+        <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" Height="27" Margin="10,259,0,0" VerticalAlignment="Top" Width="621"/>
+        <Label x:Name="Label" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Width="621" Height="27" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

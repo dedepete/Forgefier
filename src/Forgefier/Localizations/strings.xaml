@@ -5,9 +5,9 @@
     <v:String x:Key="r_ButtonInstall">Install</v:String>
     
     <!-- CheckBoxes -->
-    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Display other versions (some can be unstable)</v:String>
-    <v:String x:Key="r_CheckBoxCustomVersionId">Custom version ID:</v:String>
     <v:String x:Key="r_CheckBoxCustomProfileName">Custom profile name:</v:String>
+    <v:String x:Key="r_CheckBoxCustomVersionId">Custom version ID:</v:String>
+    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Display other versions (some can be unstable)</v:String>
     
     <!-- Expanders -->
     <v:String x:Key="r_ExpanderExtendedOptions">Extended options</v:String>
@@ -15,12 +15,28 @@
     <!-- Labels -->
     <v:String x:Key="r_LabelIntro">This small tool will help you to install Minecraft Forge.</v:String>
     <v:String x:Key="r_LabelMinecraftDirectory">Minecraft directory:</v:String>
-    
+
+        <!-- Installation Statuses -->
+    <v:String x:Key="r_LabelStatusCopyingUniversal">Copying Universal into Libraries...</v:String>
+    <v:String x:Key="r_LabelStatusCreatingManifest">Creating custom manifest...</v:String>
+    <v:String x:Key="r_LabelStatusCreatingVersion">Creating custom version...</v:String>
+    <v:String x:Key="r_LabelStatusDone">Done!</v:String>
+    <v:String x:Key="r_LabelStatusDownloadingForge">Downloading Forge...</v:String>
+    <v:String x:Key="r_LabelStatusException">An exception has occurred! See logs for more info. Installation aborted.</v:String>
+    <v:String x:Key="r_LabelStatusPatchingJar">Patching JAR...</v:String>
+    <v:String x:Key="r_LabelStatusPatchingJson">Patching JSON...</v:String>
+    <v:String x:Key="r_LabelStatusProcessingInstaller">Processing installer...</v:String>
+    <v:String x:Key="r_LabelStatusUpdatingProfiles">Updating profiles...</v:String>
+    <v:String x:Key="r_LabelStatusValidatingLibraries">Validating libraries...</v:String>
+    <v:String x:Key="r_LabelStatusValidatingVersion">Validating Minecraft files...</v:String>
+
     <!-- Messages -->
-    <v:String x:Key="r_SelectFolderMessage" xml:space="preserve">Select Minecraft directory.&#x0d;&#x0a;It should contain launcher_profiles.json.</v:String>
+    <v:String x:Key="r_MessageNoInternet" xml:space="preserve">Failed to establish a connection to the Internet!&#x0d;&#x0a;Please, check your network configuration and restart the program.</v:String>
+    <v:String x:Key="r_MessageSelectFolder" xml:space="preserve">Select Minecraft directory.&#x0d;&#x0a;It should contain launcher_profiles.json.</v:String>
     <v:String x:Key="r_MessageSuccess">Sucessfully installed Forge {0} for Minecraft {1}!</v:String>
 
     <!-- Titles -->
-    <v:String x:Key="r_TitleInstallation">Installing Minecraft Forge</v:String>
     <v:String x:Key="r_TitleDone">Done!</v:String>
+    <v:String x:Key="r_TitleError">Error!</v:String>
+    <v:String x:Key="r_TitleInstallation">Installing Minecraft Forge</v:String>
 </ResourceDictionary>
