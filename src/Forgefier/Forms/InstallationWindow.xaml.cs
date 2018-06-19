@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using dotMCLauncher.Versioning;
@@ -17,6 +18,7 @@ namespace Forgefier
         private string _mcDirectory { get; }
         private string _mcVersions { get; }
         private string _mcLibs { get; }
+        private string _tempDir { get; set; }
         private McForgeVersion _mcForgeVersion { get; }
         private string _customVersionId { get; }
         private string _customProfileName { get; }
@@ -36,6 +38,8 @@ namespace Forgefier
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            _tempDir = GetTempDirectory();
+            AppendLog($"Created temp directory {_tempDir}.");
             Thread thread = new Thread(BeginInstallation);
             thread.Start();
         }
@@ -122,7 +126,7 @@ namespace Forgefier
                     AppendLog("Installing Forge for LEGACY version...");
                     AppendLog("Downloading Forge...");
                     SetStatusLabel(FindResource("r_LabelStatusDownloadingForge").ToString());
-                    _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "temp.zip"));
+                    _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(_tempDir, "temp.zip"));
 
                     AppendLog($"Creating custom `{_customVersionId}` version from `{_mcForgeVersion.McVersion}`...");
                     SetStatusLabel(FindResource("r_LabelStatusCreatingVersion").ToString());
@@ -145,7 +149,7 @@ namespace Forgefier
                     IncreaseProgressValue();
                     AppendLog("Patching JAR...");
                     SetStatusLabel(FindResource("r_LabelStatusPatchingJar").ToString());
-                    using (ZipFile zip = ZipFile.Read(Path.Combine(destDir, "temp.zip"))) {
+                    using (ZipFile zip = ZipFile.Read(Path.Combine(_tempDir, "temp.zip"))) {
                         using (ZipFile zipVersion = ZipFile.Read(Path.Combine(destDir, _customVersionId + ".jar"))) {
                             foreach (ZipEntry entry in zip) {
                                 using (MemoryStream ms = new MemoryStream()) {
@@ -169,7 +173,6 @@ namespace Forgefier
                     JObject jo = JObject.Parse(File.ReadAllText(Path.Combine(destDir, _customVersionId + ".json")));
                     jo["id"] = _customVersionId;
                     File.WriteAllText(Path.Combine(destDir, _customVersionId + ".json"), jo.ToString(Formatting.Indented));
-                    File.Delete(Path.Combine(destDir, "temp.zip"));
                     IncreaseProgressValue();
                 }
 
@@ -177,12 +180,12 @@ namespace Forgefier
                     AppendLog("Installing Forge for version with INSTALLER...");
                     AppendLog("Downloading Forge...");
                     SetStatusLabel(FindResource("r_LabelStatusDownloadingForge").ToString());
-                    _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(destDir, "installer.zip"));
+                    _webClient.DownloadFile(_mcForgeVersion.DownloadUrl, Path.Combine(_tempDir, "installer.zip"));
                     IncreaseProgressValue();
                     JObject jobject = new JObject();
                     AppendLog("Processing installer...");
                     SetStatusLabel(FindResource("r_LabelStatusProcessingInstaller").ToString());
-                    using (ZipFile zipInstaller = ZipFile.Read(Path.Combine(destDir, "installer.zip"))) {
+                    using (ZipFile zipInstaller = ZipFile.Read(Path.Combine(_tempDir, "installer.zip"))) {
                         foreach (ZipEntry entry in zipInstaller) {
                             if (entry.FileName == "install_profile.json") {
                                 AppendLog(" Found install_profile.json. Getting version manifest...");
@@ -200,8 +203,6 @@ namespace Forgefier
                             }
                         }
                     }
-
-                    File.Delete(Path.Combine(destDir, "installer.zip"));
 
                     jobject["versionInfo"]["id"] = _customVersionId;
                     if (jobject["versionInfo"]["inheritsFrom"] == null) {
@@ -247,6 +248,18 @@ namespace Forgefier
                         _mcLibs + forgeUniversal.GetPath(), true);
                     File.Delete(Path.Combine(destDir, jobject["install"]["filePath"].ToString()));
                     IncreaseProgressValue();
+                    
+                    string[] files = {
+                        "unpack.bat", "xz-1.8.jar", "LibraryUnpacker.jar"
+                    };
+                    foreach (string filename in files) {
+                        using (Stream resource = Assembly.GetExecutingAssembly().GetManifestResourceStream($"Forgefier.Embedded.{filename}")) {
+                            using (FileStream file = new FileStream(Path.Combine(_tempDir, filename), FileMode.Create, FileAccess.Write)) {
+                                resource.CopyTo(file);
+                            }
+                        }
+                    }
+
                     DownloadLibraries(_customVersionId);
                 }
 
@@ -373,7 +386,8 @@ namespace Forgefier
                                 StartInfo = {
                                     UseShellExecute = false,
                                     CreateNoWindow = true,
-                                    FileName = @".\ForgefierData\unpacker\unpack.bat",
+                                    WorkingDirectory = _tempDir,
+                                    FileName = $@"{_tempDir}\unpack.bat",
                                     Arguments =
                                         $"\"{_mcLibs + @"\" + entry.Path + ".pack.xz"}\" \"{_mcLibs + @"\" + entry.Path}\""
                                 }
@@ -407,6 +421,20 @@ namespace Forgefier
             if (!_allowQuit) {
                 e.Cancel = true;
             }
+
+            Directory.Delete(_tempDir, true);
+        }
+
+        private static string GetTempDirectory()
+        {
+            string path = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
+
+            if (Directory.Exists(path)) {
+                Directory.Delete(path);
+            }
+
+            Directory.CreateDirectory(path);
+            return path;
         }
     }
 }

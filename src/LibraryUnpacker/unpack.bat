@@ -4,4 +4,4 @@
 :: https://github.com/MinecraftForge/Installer/blob/2228c90908ea51c417dea631b9807618c6746f89/src/main/java/net/minecraftforge/installer/DownloadUtils.java
 
 @ECHO OFF
-java -cp ".\ForgefierData\unpacker\xz-1.8.jar;.\ForgefierData\unpacker\LibraryUnpacker.jar" ru.dedepete.forgefier.LibraryUnpacker %1 %2
+java -cp "xz-1.8.jar;LibraryUnpacker.jar" ru.dedepete.forgefier.LibraryUnpacker %1 %2
