@@ -7,7 +7,7 @@
     <!-- CheckBoxes -->
     <v:String x:Key="r_CheckBoxDisplayOtherVersions">Отобр. другие версии (некоторые могут быть нестабильными)</v:String>
     <v:String x:Key="r_CheckBoxCustomVersionId">Польз. ID версии:</v:String>
-    <v:String x:Key="r_CheckBoxCustomProfileName">Польз. название профиля:</v:String>
+    <v:String x:Key="r_CheckBoxCustomProfileName">Польз. назв. профиля:</v:String>
     
     <!-- Expanders -->
     <v:String x:Key="r_ExpanderExtendedOptions">Расширенные настройки</v:String>
