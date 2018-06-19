@@ -20,7 +20,6 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 
 ## To do
 
-- Emdeded LibraryUnpacker.jar;
 - Custom Java path;
 - Command line arguments.
 
