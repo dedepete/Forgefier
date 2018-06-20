@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="255" Width="420" ResizeMode="CanMinimize">
+        Height="245" Width="410" ResizeMode="CanMinimize">
     <Grid>
         <TextBox x:Name="TextBoxPath" HorizontalAlignment="Left" Height="23" Margin="179,101,0,0" VerticalAlignment="Top" Width="168" MaxLines="1"/>
         <Button x:Name="ButtonBrowse" Content="..." HorizontalAlignment="Left" Height="23" Margin="352,101,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.519,0.721" Click="ButtonBrowse_Click"/>

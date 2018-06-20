@@ -12,6 +12,7 @@ namespace Forgefier
         private ForgefierApp()
         {
             InitializeComponent();
+            CosturaUtility.Initialize();
         }
 
         // TODO: Remove these shitdozens of shitcode.

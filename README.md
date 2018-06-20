@@ -10,7 +10,7 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 ## Requirements
 
 - Not being a slow-witted;
-- **.NET Framework 4.5**;
+- **.NET Framework 4.6.1**;
 - **Java Runtime Environment 8** and above;
 - Established **Internet connection** during the installation.
 
@@ -33,6 +33,8 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 
 - [JSON.NET](http://james.newtonking.com/json);
 - [DotNetZip](https://github.com/haf/DotNetZip.Semverd);
+- [Fody](https://github.com/Fody/Fody)
+- [Fody.Costura](https://github.com/Fody/Costura)
 - [Forge Installer](https://github.com/MinecraftForge/Installer/).
 
 ## License

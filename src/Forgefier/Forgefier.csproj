@@ -9,11 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Forgefier</RootNamespace>
     <AssemblyName>Forgefier</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +39,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Costura, Version=3.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Costura.Fody.3.0.0\lib\net46\Costura.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="dotMCLauncher">
       <HintPath>..\..\lib\dotMCLauncher.dll</HintPath>
     </Reference>
@@ -113,7 +119,11 @@
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Embedded\LibraryUnpacker.jar" />
     <EmbeddedResource Include="Embedded\xz-1.8.jar" />
@@ -131,4 +141,13 @@
     </ItemGroup>
     <Exec Condition="$(OS) == 'Windows_NT'" Command="..\..\scripts\post_build.bat $(Configuration)" />
   </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Fody.3.0.4\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.3.0.4\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\Fody.3.0.4\build\Fody.targets" Condition="Exists('..\..\packages\Fody.3.0.4\build\Fody.targets')" />
+  <Import Project="..\..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets" Condition="Exists('..\..\packages\Costura.Fody.3.0.0\build\Costura.Fody.targets')" />
 </Project>
