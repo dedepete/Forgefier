@@ -43,12 +43,6 @@
       <HintPath>..\..\packages\Costura.Fody.3.0.0\lib\net46\Costura.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="dotMCLauncher">
-      <HintPath>..\..\lib\dotMCLauncher.dll</HintPath>
-    </Reference>
-    <Reference Include="dotMCLauncher.Versioning">
-      <HintPath>..\..\lib\dotMCLauncher.Versioning.dll</HintPath>
-    </Reference>
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -126,6 +120,16 @@
   <ItemGroup>
     <EmbeddedResource Include="Embedded\LibraryUnpacker.jar" />
     <EmbeddedResource Include="Embedded\xz-1.8.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\FreeLauncher\src\dotMCLauncher.Versioning\dotMCLauncher.Versioning.csproj">
+      <Project>{e41644a8-2949-4cc3-b1b1-cebf32b055a2}</Project>
+      <Name>dotMCLauncher.Versioning</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\FreeLauncher\src\dotMCLauncher\dotMCLauncher.csproj">
+      <Project>{56c1e499-2f30-4892-a71a-4f72913a2116}</Project>
+      <Name>dotMCLauncher</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild">
