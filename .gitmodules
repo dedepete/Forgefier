@@ -1,0 +1,3 @@
+[submodule "FreeLauncher"]
+	path = FreeLauncher
+	url = https://github.com/dedepete/FreeLauncher.git
