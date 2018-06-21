@@ -114,7 +114,6 @@
       <SubType>Code</SubType>
     </Compile>
     <None Include="app.config" />
-    <EmbeddedResource Include="Embedded\unpack.bat" />
     <None Include="Embedded\.gitignore" />
     <None Include="packages.config" />
     <AppDesigner Include="Properties\" />

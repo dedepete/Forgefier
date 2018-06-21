@@ -33,7 +33,7 @@
     <!-- Messages -->
     <v:String x:Key="r_MessageNoInternet" xml:space="preserve">Не удалось установить соединение с Интернетом!&#x0d;&#x0a;Пожалуйста, проверьте свою конфигурацию сети и перезапустите программу.</v:String>
     <v:String x:Key="r_MessageSuccess">Forge версии {0} успешно установлен для Minecraft {1}!</v:String>
-    <v:String x:Key="r_SelectFolderMessage" xml:space="preserve">Выберите папку с Minecraft.&#x0d;&#x0a;Она должна содержать файл launcher_profiles.json.</v:String>
+    <v:String x:Key="r_MessageSelectFolder" xml:space="preserve">Выберите папку с Minecraft.&#x0d;&#x0a;Она должна содержать файл launcher_profiles.json.</v:String>
 
     <!-- Titles -->
     <v:String x:Key="r_TitleDone">Готово!</v:String>

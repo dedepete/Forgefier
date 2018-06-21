@@ -1,3 +1,12 @@
+/**
+ * 
+ * :: .pack.xz unpacker: dolboeb edition. Unpacks and decompresses .jar.pack.xz into normal JAR.
+ * C# does not have any good unpack200 implementation. C# sucks.
+ * Original code can be found here:
+ * https://github.com/MinecraftForge/Installer/blob/2228c90908ea51c417dea631b9807618c6746f89/src/main/java/net/minecraftforge/installer/DownloadUtils.java
+ * 
+ */
+
 package ru.dedepete.forgefier;
 
 import java.io.ByteArrayInputStream;
@@ -47,8 +56,8 @@ public class LibraryUnpacker {
                 ((decompressed[x - 5] & 0xFF) << 24);
 
         File temp = File.createTempFile("art", ".pack");
-        System.out.println("  Total Length:    " + (decompressed.length - len - 8));
-        System.out.println("  Temp File:       " + temp.getAbsolutePath());
+        System.out.println("Temp File:       " + temp.getAbsolutePath());
+        System.out.println("Total Length:    " + (decompressed.length - len - 8));
 
         byte[] checksums = Arrays.copyOfRange(decompressed, decompressed.length - len - 8, decompressed.length - 8);
 

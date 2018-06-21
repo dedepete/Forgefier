@@ -273,7 +273,7 @@ namespace Forgefier
                 } else {
                     (profiles["profiles"] as JObject).Add(_customProfileName, new JObject {
                         {"name", _customProfileName},
-                        {"name", _customVersionId}
+                        {"lastVersionId", _customVersionId}
                     });
                 }
 
@@ -377,39 +377,46 @@ namespace Forgefier
 
                 try {
                     if (entry.Url != null && entry.Url.Contains("minecraftforge")) {
-                        AppendLog(" Detected library from Forge repository. Downloading compressed file...");
+                        AppendLog(" Downloading compressed library...");
                         try {
                             _webClient.DownloadFile(entry.Url + ".pack.xz",
                                 _mcLibs + @"\" + entry.Path + ".pack.xz");
                             AppendLog(" Decompressing with external process...");
                             Process process = new Process {
                                 StartInfo = {
+                                    RedirectStandardOutput = true,
                                     UseShellExecute = false,
                                     CreateNoWindow = true,
                                     WorkingDirectory = _tempDir,
-                                    FileName = $@"{_tempDir}\unpack.bat",
+                                    FileName = @"java",
                                     Arguments =
+                                        "-cp \"xz-1.8.jar;LibraryUnpacker.jar\" ru.dedepete.forgefier.LibraryUnpacker " +
                                         $"\"{_mcLibs + @"\" + entry.Path + ".pack.xz"}\" \"{_mcLibs + @"\" + entry.Path}\""
                                 }
                             };
                             process.Start();
+                            string output = process.StandardOutput.ReadToEnd();
                             process.WaitForExit();
                             AppendLog($"  Process exited with code {process.ExitCode}.");
+                            if (process.ExitCode != 0) {
+                                AppendLog($"  Output:\n{output}");
+                            }
+
                             AppendLog(" Removing .PACK.XZ...");
                             File.Delete(_mcLibs + @"\" + entry.Path + ".pack.xz");
                             continue;
                         }
-                        catch {
-                            AppendLog(" Failed to download compressed file.");
+                        catch (Exception exception) {
+                            AppendLog($" Failed to download compressed library: {exception.Message}");
                         }
                     }
 
-                    AppendLog(" Downloading decompressed JAR...");
+                    AppendLog(" Downloading library...");
                     _webClient.DownloadFile(entry.Url ?? @"https://libraries.minecraft.net/" + entry.Path,
                         _mcLibs + @"\" + entry.Path);
                 }
                 catch (WebException exception) {
-                    AppendLog($" Download failure. {exception.Message}");
+                    AppendLog($" Failed to download library: {exception.Message}");
                     AppendLog(" Removing corrupted file...");
                     File.Delete(_mcLibs + @"\" + entry.Path);
                 }
