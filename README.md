@@ -25,16 +25,18 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 
 ## Building
 
-1. Download and Install Java Development Kit if needed.
-2. Go to `src\LibraryUnpacker` and change JDK path in `build.bat` to your JDK installation path.
-3. That's it! Now you can open the project in Visual Studio.
+1. Run `git submodule init` and `git submodule update` commands within project's root directory to get contents of submodules.
+2. Run `nuget restore` command within project's root directory to restore NuGet packages.
+3. Download and Install Java Development Kit if needed.
+4. Go to `src\LibraryUnpacker` and change JDK path in `build.bat` to your JDK installation path.
+5. That's it! Now you can open the project in Visual Studio.
 
 ## Third-party assemblies and code
 
 - [JSON.NET](http://james.newtonking.com/json);
 - [DotNetZip](https://github.com/haf/DotNetZip.Semverd);
-- [Fody](https://github.com/Fody/Fody)
-- [Fody.Costura](https://github.com/Fody/Costura)
+- [Fody](https://github.com/Fody/Fody);
+- [Fody.Costura](https://github.com/Fody/Costura);
 - [Forge Installer](https://github.com/MinecraftForge/Installer/).
 
 ## License
