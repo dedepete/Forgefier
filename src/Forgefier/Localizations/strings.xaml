@@ -7,7 +7,7 @@
     <!-- CheckBoxes -->
     <v:String x:Key="r_CheckBoxCustomProfileName">Custom profile name:</v:String>
     <v:String x:Key="r_CheckBoxCustomVersionId">Custom version ID:</v:String>
-    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Display other versions (some can be unstable)</v:String>
+    <v:String x:Key="r_CheckBoxDisplayOnlyRecommended">Display only recommended builds</v:String>
     
     <!-- Expanders -->
     <v:String x:Key="r_ExpanderExtendedOptions">Extended options</v:String>
@@ -39,4 +39,8 @@
     <v:String x:Key="r_TitleDone">Done!</v:String>
     <v:String x:Key="r_TitleError">Error!</v:String>
     <v:String x:Key="r_TitleInstallation">Installing Minecraft Forge</v:String>
+
+    <!-- MenuItems -->
+    <v:String x:Key="r_MItemLanguage">Language</v:String>
+    <v:String x:Key="r_MItemAbout">About</v:String>
 </ResourceDictionary>

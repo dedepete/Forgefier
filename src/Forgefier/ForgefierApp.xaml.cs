@@ -112,7 +112,7 @@ namespace Forgefier
 
                 window.ComboBoxForgeVersions.Items.Clear();
 
-                if (window.CheckBoxDisplayOtherVersions.IsChecked ?? false) {
+                if (!window.CheckBoxDisplayOnlyRecommended.IsChecked ?? false) {
                     foreach (McForgeVersion version in list[new McVersion(window.СomboBoxPromo.SelectedItem.ToString())]) {
                         window.ComboBoxForgeVersions.Items.Add(version);
                     }
@@ -133,12 +133,8 @@ namespace Forgefier
             };
             window.СomboBoxPromo.SelectedIndex = 0;
 
-            window.CheckBoxDisplayOtherVersions.Checked += delegate {
-                window.СomboBoxPromo.ItemsSource = list.Keys;
-                window.СomboBoxPromo.SelectedIndex = 0;
-            };
-
-            window.CheckBoxDisplayOtherVersions.Unchecked += delegate {
+            window.CheckBoxDisplayOnlyRecommended.Checked += delegate {
+                window.ComboBoxForgeVersions.IsEnabled = false;
                 List<McForgePromoVersion> versions = new List<McForgePromoVersion>();
                 foreach (List<Tuple<McForgePromoVersion, McForgeVersion>> version in promoVersions.Values) {
                     foreach (Tuple<McForgePromoVersion, McForgeVersion> tuple in version) {
@@ -151,7 +147,14 @@ namespace Forgefier
                 window.СomboBoxPromo.ItemsSource = versions;
                 window.СomboBoxPromo.SelectedIndex = 0;
             };
-            window.CheckBoxDisplayOtherVersions.IsChecked = false;
+
+            window.CheckBoxDisplayOnlyRecommended.Unchecked += delegate {
+                window.ComboBoxForgeVersions.IsEnabled = true;
+                window.СomboBoxPromo.ItemsSource = list.Keys;
+                window.СomboBoxPromo.SelectedIndex = 0;
+            };
+
+            window.CheckBoxDisplayOnlyRecommended.IsChecked = true;
             app.Run(window);
         }
 

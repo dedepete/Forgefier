@@ -4,24 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="245" Width="410" ResizeMode="CanMinimize">
+        Height="300" Width="350" ResizeMode="CanMinimize">
     <Grid>
-        <TextBox x:Name="TextBoxPath" HorizontalAlignment="Left" Height="23" Margin="179,101,0,0" VerticalAlignment="Top" Width="168" MaxLines="1"/>
-        <Button x:Name="ButtonBrowse" Content="..." HorizontalAlignment="Left" Height="23" Margin="352,101,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.519,0.721" Click="ButtonBrowse_Click"/>
-        <CheckBox x:Name="CheckBoxDisplayOtherVersions" Content="{DynamicResource r_CheckBoxDisplayOtherVersions}" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Width="382" IsChecked="True"/>
-        <ComboBox x:Name="СomboBoxPromo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="10,71,0,0"/>
-        <ComboBox x:Name="ComboBoxForgeVersions" HorizontalAlignment="Left" VerticalAlignment="Top" Width="213" Margin="179,71,0,0" SelectionChanged="ComboBoxForgeVersions_SelectionChanged"/>
-        <TextBlock x:Name="LabelIntro" Text="{DynamicResource r_LabelIntro}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.261,-0.144" Height="39" Width="327" TextWrapping="Wrap"/>
-        <Label x:Name="LabelMinecraftDirectory" Content="{DynamicResource r_LabelMinecraftDirectory}" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.012,0.578" Width="164"/>
-        <Expander x:Name="ExpanderExtendedOptions" Header="{DynamicResource r_ExpanderExtendedOptions}" HorizontalAlignment="Left" Height="35" Margin="10,129,0,0" VerticalAlignment="Top" Width="382" Expanded="ExpanderExtendedOptions_Expanded" Collapsed="ExpanderExtendedOptions_Collapsed">
-            <Grid x:Name="GridExtendedOptions" Background="#FFE5E5E5">
-                <CheckBox x:Name="CheckBoxCustomVersionId" Content="{DynamicResource r_CheckBoxCustomVersionId}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,11,0,0" Width="152" Unchecked="CheckBoxCustomVersionId_CheckChanged" Checked="CheckBoxCustomVersionId_CheckChanged"/>
-                <TextBox x:Name="TextBoxCustomVersionId" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="167,8,0,0" VerticalAlignment="Top" Width="203" MaxLines="1"/>
-                <CheckBox x:Name="CheckBoxCustomProfileName" Content="{DynamicResource r_CheckBoxCustomProfileName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,39,0,0" Width="152" Unchecked="CheckBoxCustomProfileName_CheckChanged" Checked="CheckBoxCustomProfileName_CheckChanged"/>
-                <TextBox x:Name="TextBoxCustomProfileName" IsEnabled="False" Text="forge" HorizontalAlignment="Left" Height="23" Margin="167,36,0,0" VerticalAlignment="Top" Width="203" MaxLines="1"/>
+        <Menu VerticalAlignment="Top" FontSize="12" Margin="0,0,0,0">
+            <MenuItem x:Name="MenuItemLanguage" Header="{DynamicResource r_MItemLanguage}"/>
+            <MenuItem Header="{DynamicResource r_MItemAbout}" Click="MenuItemAbout_Click"/>
+        </Menu>
+        <TextBox x:Name="TextBoxPath" Height="23" Margin="10,160,64,0" VerticalAlignment="Top" MaxLines="1"/>
+        <Button Content="..." Height="23" Margin="0,160,10,0" VerticalAlignment="Top" Click="ButtonBrowse_Click" HorizontalAlignment="Right" Width="45"/>
+        <CheckBox x:Name="CheckBoxDisplayOnlyRecommended" Content="{DynamicResource r_CheckBoxDisplayOnlyRecommended}" Margin="10,65,10,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="СomboBoxPromo" VerticalAlignment="Top" Margin="10,85,10,0"/>
+        <ComboBox x:Name="ComboBoxForgeVersions" VerticalAlignment="Top" Margin="10,115,10,0" SelectionChanged="ComboBoxForgeVersions_SelectionChanged"/>
+        <TextBlock Text="{DynamicResource r_LabelIntro}" Margin="10,27,10,0" VerticalAlignment="Top" Height="32" TextWrapping="Wrap" TextAlignment="Center"/>
+        <Label Content="{DynamicResource r_LabelMinecraftDirectory}" Margin="10,135,10,0" VerticalAlignment="Top"/>
+        <Expander x:Name="ExpanderExtendedOptions" Header="{DynamicResource r_ExpanderExtendedOptions}" Height="35" Margin="10,188,10,0" VerticalAlignment="Top" Expanded="ExpanderExtendedOptions_Expanded" Collapsed="ExpanderExtendedOptions_Collapsed">
+            <Grid Background="#FFE5E5E5">
+                <CheckBox x:Name="CheckBoxCustomVersionId" Content="{DynamicResource r_CheckBoxCustomVersionId}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,10,0" Width="300" Unchecked="CheckBoxCustomVersionId_CheckChanged" Checked="CheckBoxCustomVersionId_CheckChanged"/>
+                <TextBox x:Name="TextBoxCustomVersionId" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="10,25,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
+                <CheckBox x:Name="CheckBoxCustomProfileName" Content="{DynamicResource r_CheckBoxCustomProfileName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,55,10,0" Width="300" Unchecked="CheckBoxCustomProfileName_CheckChanged" Checked="CheckBoxCustomProfileName_CheckChanged"/>
+                <TextBox x:Name="TextBoxCustomProfileName" IsEnabled="False" Text="forge" HorizontalAlignment="Left" Height="23" Margin="10,75,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
             </Grid>
         </Expander>
-        <Button x:Name="ButtonInstall" Content="{DynamicResource r_ButtonInstall}" Margin="100,0,100,10" Height="32" VerticalAlignment="Bottom" Click="ButtonInstall_Click"/>
-        <ComboBox x:Name="ComboBoxLanguage" HorizontalAlignment="Left" Margin="342,10,0,0" VerticalAlignment="Top" Width="51" SelectionChanged="ComboBoxLanguage_SelectionChanged"/>
+        <Button x:Name="ButtonInstall" Content="{DynamicResource r_ButtonInstall}" Margin="10,0,10,10" Height="32" VerticalAlignment="Bottom" Click="ButtonInstall_Click"/>
     </Grid>
 </Window>

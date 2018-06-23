@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -19,22 +20,75 @@ namespace Forgefier
                 ".minecraft");
             TextBoxPath.Focus();
             TextBoxPath.Select(TextBoxPath.Text.Length, 0);
-            ComboBoxLanguage.Items.Add("EN");
-            ComboBoxLanguage.Items.Add("RU");
 
-            int index = 0;
-            if (ComboBoxLanguage.Items.Contains(
-                CultureInfo.InstalledUICulture.TwoLetterISOLanguageName.ToUpperInvariant())) {
-                index = ComboBoxLanguage.Items.IndexOf(CultureInfo.InstalledUICulture.TwoLetterISOLanguageName.ToUpperInvariant());
-            }
+            string[] languageCodes = {
+                "en", "ru-RU"
+            };
+            languageCodes.ToList().ForEach(
+                code => {
+                    CultureInfo cultureInfo = new CultureInfo(code);
+                    System.Windows.Controls.MenuItem item = new System.Windows.Controls.MenuItem {
+                        Header = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(cultureInfo.NativeName),
+                        IsCheckable = true
+                    };
+                    item.Checked += delegate {
+                        foreach (System.Windows.Controls.MenuItem mi in MenuItemLanguage.Items) {
+                            if (mi.Header != item.Header) {
+                                mi.IsChecked = false;
+                            }
 
-            ComboBoxLanguage.SelectedIndex = index;
+                            item.IsEnabled = false;
+                            ResourceDictionary dictionary = new ResourceDictionary {
+                                Source = new Uri(
+                                    cultureInfo.Name == "en" ? "Localizations/strings.xaml" : $"Localizations/strings.{cultureInfo.Name}.xaml",
+                                    UriKind.Relative)
+                            };
+
+                            if (dictionary.Source != new Uri("Localizations/strings.xaml", UriKind.Relative)) {
+                                ResourceDictionary originalDictionary = new ResourceDictionary {
+                                    Source = new Uri("Localizations/strings.xaml", UriKind.Relative)
+                                };
+                                if (dictionary.Keys.Count != originalDictionary.Keys.Count) {
+                                    foreach (string key in originalDictionary.Keys) {
+                                        if (!dictionary.Contains(key)) {
+                                            dictionary.Add(key, originalDictionary[key]);
+                                        }
+                                    }
+                                }
+                            }
+
+                            ResourceDictionary oldDictionary = (from resourceDictionary in Application.Current.Resources.MergedDictionaries
+                                where resourceDictionary.Source != null &&
+                                      resourceDictionary.Source.OriginalString.StartsWith("Localizations/strings.")
+                                select resourceDictionary).First();
+                            if (oldDictionary != null) {
+                                int index = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                                Application.Current.Resources.MergedDictionaries.Insert(index, dictionary);
+                            } else {
+                                Application.Current.Resources.MergedDictionaries.Add(dictionary);
+                            }
+                        }
+                    };
+                    item.Unchecked += (sender, args) => { item.IsEnabled = true; };
+
+                    if (!languageCodes.Contains(CultureInfo.InstalledUICulture.Name)) {
+                        item.IsChecked = cultureInfo.Name == "en";
+                        item.IsEnabled = cultureInfo.Name != "en";
+                    } else {
+                        item.IsChecked = string.Equals(cultureInfo.Name, CultureInfo.InstalledUICulture.Name,
+                            StringComparison.InvariantCultureIgnoreCase);
+                    }
+
+                    MenuItemLanguage.Items.Add(item);
+                });
+
             Title = $"{Application.ResourceAssembly.GetName().Name} {Application.ResourceAssembly.GetName().Version}";
         }
 
         private void ExpanderExtendedOptions_Expanded(object sender, RoutedEventArgs e)
         {
-            ExpanderExtendedOptions.Height = 90;
+            ExpanderExtendedOptions.Height = 130;
             Height += ExpanderExtendedOptions.Height - 33;
         }
 
@@ -63,54 +117,6 @@ namespace Forgefier
             TextBoxCustomProfileName.IsEnabled = CheckBoxCustomProfileName.IsChecked ?? false;
         }
 
-        private void ComboBoxLanguage_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            CultureInfo cultureInfo = new CultureInfo("en");
-            switch (ComboBoxLanguage.SelectedIndex) {
-                case 0:
-                    cultureInfo = new CultureInfo("en");
-                    break;
-                case 1:
-                    cultureInfo = new CultureInfo("ru-RU");
-                    break;
-
-            }
-
-            ResourceDictionary dictionary = new ResourceDictionary();
-            switch (cultureInfo.Name) {
-                case "ru-RU":
-                    dictionary.Source = new Uri($"Localizations/strings.{cultureInfo.Name}.xaml", UriKind.Relative);
-                    break;
-                default:
-                    dictionary.Source = new Uri("Localizations/strings.xaml", UriKind.Relative);
-                    break;
-            }
-
-            if (dictionary.Source != new Uri("Localizations/strings.xaml", UriKind.Relative)) {
-                ResourceDictionary originalDictionary = new ResourceDictionary {
-                    Source = new Uri("Localizations/strings.xaml", UriKind.Relative)
-                };
-                if (dictionary.Keys.Count != originalDictionary.Keys.Count) {
-                    foreach (string key in originalDictionary.Keys) {
-                        if (!dictionary.Contains(key)) {
-                            dictionary.Add(key, originalDictionary[key]);
-                        }
-                    }
-                }
-            }
-
-            ResourceDictionary oldDictionary = (from d in Application.Current.Resources.MergedDictionaries
-                where d.Source != null && d.Source.OriginalString.StartsWith("Localizations/strings.")
-                select d).First();
-            if (oldDictionary != null) {
-                int index = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
-                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
-                Application.Current.Resources.MergedDictionaries.Insert(index, dictionary);
-            } else {
-                Application.Current.Resources.MergedDictionaries.Add(dictionary);
-            }
-        }
-
         private void ButtonInstall_Click(object sender, RoutedEventArgs e)
         {
             McForgeVersion mcForgeVersion = ComboBoxForgeVersions.SelectedItem as McForgeVersion;
@@ -132,6 +138,11 @@ namespace Forgefier
             }
 
             TextBoxPath.Text = dialog.SelectedPath;
+        }
+
+        private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(@"https://github.com/dedepete/Forgefier");
         }
     }
 }

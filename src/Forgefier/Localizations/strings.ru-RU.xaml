@@ -5,9 +5,9 @@
     <v:String x:Key="r_ButtonInstall">Установить</v:String>
     
     <!-- CheckBoxes -->
-    <v:String x:Key="r_CheckBoxCustomProfileName">Польз. назв. профиля:</v:String>
-    <v:String x:Key="r_CheckBoxCustomVersionId">Польз. ID версии:</v:String>
-    <v:String x:Key="r_CheckBoxDisplayOtherVersions">Отобр. другие версии (некоторые могут быть нестабильными)</v:String>
+    <v:String x:Key="r_CheckBoxCustomProfileName">Пользовательское название профиля:</v:String>
+    <v:String x:Key="r_CheckBoxCustomVersionId">Пользовательский ID версии:</v:String>
+    <v:String x:Key="r_CheckBoxDisplayOnlyRecommended">Отображать только рекомендованные сборки</v:String>
     
     <!-- Expanders -->
     <v:String x:Key="r_ExpanderExtendedOptions">Расширенные настройки</v:String>
@@ -39,4 +39,8 @@
     <v:String x:Key="r_TitleDone">Готово!</v:String>
     <v:String x:Key="r_TitleError">Ошибка!</v:String>
     <v:String x:Key="r_TitleInstallation">Установка Minecraft Forge</v:String>
+
+    <!-- MenuItems -->
+    <v:String x:Key="r_MItemLanguage">Язык</v:String>
+    <v:String x:Key="r_MItemAbout">О программе</v:String>
 </ResourceDictionary>

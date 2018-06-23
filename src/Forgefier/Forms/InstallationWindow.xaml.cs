@@ -248,9 +248,9 @@ namespace Forgefier
                         _mcLibs + forgeUniversal.GetPath(), true);
                     File.Delete(Path.Combine(destDir, jobject["install"]["filePath"].ToString()));
                     IncreaseProgressValue();
-                    
+
                     string[] files = {
-                        "unpack.bat", "xz-1.8.jar", "LibraryUnpacker.jar"
+                        "xz-1.8.jar", "LibraryUnpacker.jar"
                     };
                     foreach (string filename in files) {
                         using (Stream resource = Assembly.GetExecutingAssembly().GetManifestResourceStream($"Forgefier.Embedded.{filename}")) {
