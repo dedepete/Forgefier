@@ -88,7 +88,7 @@ namespace Forgefier
 
         private void ExpanderExtendedOptions_Expanded(object sender, RoutedEventArgs e)
         {
-            ExpanderExtendedOptions.Height = 130;
+            ExpanderExtendedOptions.Height = 180;
             Height += ExpanderExtendedOptions.Height - 33;
         }
 
@@ -121,7 +121,7 @@ namespace Forgefier
         {
             McForgeVersion mcForgeVersion = ComboBoxForgeVersions.SelectedItem as McForgeVersion;
             ButtonInstall.IsEnabled = false;
-            new InstallationWindow(TextBoxPath.Text, mcForgeVersion, TextBoxCustomVersionId.Text, TextBoxCustomProfileName.Text).ShowDialog();
+            new InstallationWindow(TextBoxPath.Text, mcForgeVersion, TextBoxCustomVersionId.Text, TextBoxCustomProfileName.Text, TextBoxCustomJavaExecutable.Text).ShowDialog();
             ButtonInstall.IsEnabled = true;
         }
 
@@ -143,6 +143,11 @@ namespace Forgefier
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(@"https://github.com/dedepete/Forgefier");
+        }
+
+        private void CheckBoxCustomJavaExecutable_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            TextBoxCustomJavaExecutable.IsEnabled = CheckBoxCustomJavaExecutable.IsChecked ?? false;
         }
     }
 }

@@ -22,10 +22,11 @@ namespace Forgefier
         private McForgeVersion _mcForgeVersion { get; }
         private string _customVersionId { get; }
         private string _customProfileName { get; }
+        private string _javaPath { get; }
         private readonly WebClient _webClient = new WebClient();
         private bool _allowQuit { get; set; }
 
-        public InstallationWindow(string mcDirectory, McForgeVersion forgeVersion, string versionId, string profileName)
+        public InstallationWindow(string mcDirectory, McForgeVersion forgeVersion, string versionId, string profileName, string javaPath)
         {
             InitializeComponent();
             _mcDirectory = mcDirectory;
@@ -34,6 +35,7 @@ namespace Forgefier
             _mcForgeVersion = forgeVersion;
             _customVersionId = versionId;
             _customProfileName = profileName;
+            _javaPath = javaPath;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -388,7 +390,7 @@ namespace Forgefier
                                     UseShellExecute = false,
                                     CreateNoWindow = true,
                                     WorkingDirectory = _tempDir,
-                                    FileName = @"java",
+                                    FileName = _javaPath,
                                     Arguments =
                                         "-cp \"xz-1.8.jar;LibraryUnpacker.jar\" ru.dedepete.forgefier.LibraryUnpacker " +
                                         $"\"{_mcLibs + @"\" + entry.Path + ".pack.xz"}\" \"{_mcLibs + @"\" + entry.Path}\""

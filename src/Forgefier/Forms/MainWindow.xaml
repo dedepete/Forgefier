@@ -23,6 +23,8 @@
                 <TextBox x:Name="TextBoxCustomVersionId" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="10,25,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
                 <CheckBox x:Name="CheckBoxCustomProfileName" Content="{DynamicResource r_CheckBoxCustomProfileName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,55,10,0" Width="300" Unchecked="CheckBoxCustomProfileName_CheckChanged" Checked="CheckBoxCustomProfileName_CheckChanged"/>
                 <TextBox x:Name="TextBoxCustomProfileName" IsEnabled="False" Text="forge" HorizontalAlignment="Left" Height="23" Margin="10,75,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
+                <CheckBox x:Name="CheckBoxCustomJavaExecutable" Content="{DynamicResource r_CheckBoxCustomJavaExecutable}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,105,10,0" Width="300" Unchecked="CheckBoxCustomJavaExecutable_CheckChanged" Checked="CheckBoxCustomJavaExecutable_CheckChanged"/>
+                <TextBox x:Name="TextBoxCustomJavaExecutable" IsEnabled="False" Text="java" HorizontalAlignment="Left" Height="23" Margin="10,125,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
             </Grid>
         </Expander>
         <Button x:Name="ButtonInstall" Content="{DynamicResource r_ButtonInstall}" Margin="10,0,10,10" Height="32" VerticalAlignment="Bottom" Click="ButtonInstall_Click"/>

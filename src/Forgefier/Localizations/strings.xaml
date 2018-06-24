@@ -5,6 +5,7 @@
     <v:String x:Key="r_ButtonInstall">Install</v:String>
     
     <!-- CheckBoxes -->
+    <v:String x:Key="r_CheckBoxCustomJavaExecutable">Java executable path (java.exe):</v:String>
     <v:String x:Key="r_CheckBoxCustomProfileName">Custom profile name:</v:String>
     <v:String x:Key="r_CheckBoxCustomVersionId">Custom version ID:</v:String>
     <v:String x:Key="r_CheckBoxDisplayOnlyRecommended">Display only recommended builds</v:String>

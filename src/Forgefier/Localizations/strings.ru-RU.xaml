@@ -5,6 +5,7 @@
     <v:String x:Key="r_ButtonInstall">Установить</v:String>
     
     <!-- CheckBoxes -->
+    <v:String x:Key="r_CheckBoxCustomJavaExecutable">Расположение исп. файла Java (java.exe):</v:String>
     <v:String x:Key="r_CheckBoxCustomProfileName">Пользовательское название профиля:</v:String>
     <v:String x:Key="r_CheckBoxCustomVersionId">Пользовательский ID версии:</v:String>
     <v:String x:Key="r_CheckBoxDisplayOnlyRecommended">Отображать только рекомендованные сборки</v:String>

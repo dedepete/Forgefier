@@ -20,7 +20,6 @@ A small tool, which can install (almost) any Minecraft Forge version into Minecr
 
 ## To do
 
-- Custom Java path;
 - Command line arguments.
 
 ## Building
