@@ -86,18 +86,6 @@ namespace Forgefier
             Title = $"{Application.ResourceAssembly.GetName().Name} {Application.ResourceAssembly.GetName().Version}";
         }
 
-        private void ExpanderExtendedOptions_Expanded(object sender, RoutedEventArgs e)
-        {
-            ExpanderExtendedOptions.Height = 180;
-            Height += ExpanderExtendedOptions.Height - 33;
-        }
-
-        private void ExpanderExtendedOptions_Collapsed(object sender, RoutedEventArgs e)
-        {
-            Height -= ExpanderExtendedOptions.Height - 33;
-            ExpanderExtendedOptions.Height = 30;
-        }
-
         private void ComboBoxForgeVersions_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (_selectedMcForgeVersion == null) {
@@ -107,21 +95,12 @@ namespace Forgefier
             TextBoxCustomVersionId.Text = $"{_selectedMcForgeVersion.McVersion}-forge{_selectedMcForgeVersion.FullVersion}";
         }
 
-        private void CheckBoxCustomVersionId_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            TextBoxCustomVersionId.IsEnabled = CheckBoxCustomVersionId.IsChecked ?? false;
-        }
-
-        private void CheckBoxCustomProfileName_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            TextBoxCustomProfileName.IsEnabled = CheckBoxCustomProfileName.IsChecked ?? false;
-        }
-
         private void ButtonInstall_Click(object sender, RoutedEventArgs e)
         {
             McForgeVersion mcForgeVersion = ComboBoxForgeVersions.SelectedItem as McForgeVersion;
             ButtonInstall.IsEnabled = false;
-            new InstallationWindow(TextBoxPath.Text, mcForgeVersion, TextBoxCustomVersionId.Text, TextBoxCustomProfileName.Text, TextBoxCustomJavaExecutable.Text).ShowDialog();
+            new InstallationWindow(TextBoxPath.Text, mcForgeVersion, TextBoxCustomVersionId.Text, TextBoxCustomProfileName.Text,
+                TextBoxCustomJavaExecutable.Text).ShowDialog();
             ButtonInstall.IsEnabled = true;
         }
 
@@ -143,11 +122,6 @@ namespace Forgefier
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(@"https://github.com/dedepete/Forgefier");
-        }
-
-        private void CheckBoxCustomJavaExecutable_CheckChanged(object sender, RoutedEventArgs e)
-        {
-            TextBoxCustomJavaExecutable.IsEnabled = CheckBoxCustomJavaExecutable.IsChecked ?? false;
         }
     }
 }

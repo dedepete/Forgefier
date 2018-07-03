@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="{DynamicResource r_TitleInstallation}" Height="320" Width="650" ResizeMode="CanMinimize" WindowStyle="ToolWindow" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
-        <TextBox x:Name="TextBox" Margin="10,10,10,50" TextWrapping="Wrap" IsReadOnly="True" IsUndoEnabled="False" FontFamily="Consolas"/>
-        <ProgressBar x:Name="ProgressBar" Margin="10,245,10,10"/>
-        <Label x:Name="Label" Margin="10,245,10,10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="TextBox" Grid.Row="0" TextWrapping="Wrap" IsReadOnly="True" IsUndoEnabled="False" FontFamily="Consolas"/>
+        <ProgressBar x:Name="ProgressBar" Grid.Row="1"/>
+        <Label x:Name="Label" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

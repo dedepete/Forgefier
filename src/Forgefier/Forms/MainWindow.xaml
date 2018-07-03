@@ -1,32 +1,234 @@
-﻿<Window x:Class="Forgefier.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Height="300" Width="350" ResizeMode="CanMinimize">
+﻿<Window
+    x:Class="Forgefier.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Width="350"
+    ResizeMode="CanMinimize"
+    SizeToContent="Height">
     <Grid>
-        <Menu VerticalAlignment="Top" FontSize="12" Margin="0,0,0,0">
-            <MenuItem x:Name="MenuItemLanguage" Header="{DynamicResource r_MItemLanguage}"/>
-            <MenuItem Header="{DynamicResource r_MItemAbout}" Click="MenuItemAbout_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition
+                Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Menu
+            Grid.Row="0">
+            <MenuItem
+                x:Name="MenuItemLanguage"
+                Header="{DynamicResource r_MItemLanguage}"/>
+            <MenuItem
+                Header="{DynamicResource r_MItemAbout}"
+                Click="MenuItemAbout_Click"/>
         </Menu>
-        <TextBox x:Name="TextBoxPath" Height="23" Margin="10,160,64,0" VerticalAlignment="Top" MaxLines="1"/>
-        <Button Content="..." Height="23" Margin="0,160,10,0" VerticalAlignment="Top" Click="ButtonBrowse_Click" HorizontalAlignment="Right" Width="45"/>
-        <CheckBox x:Name="CheckBoxDisplayOnlyRecommended" Content="{DynamicResource r_CheckBoxDisplayOnlyRecommended}" Margin="10,65,10,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="СomboBoxPromo" VerticalAlignment="Top" Margin="10,85,10,0"/>
-        <ComboBox x:Name="ComboBoxForgeVersions" VerticalAlignment="Top" Margin="10,115,10,0" SelectionChanged="ComboBoxForgeVersions_SelectionChanged"/>
-        <TextBlock Text="{DynamicResource r_LabelIntro}" Margin="10,27,10,0" VerticalAlignment="Top" Height="32" TextWrapping="Wrap" TextAlignment="Center"/>
-        <Label Content="{DynamicResource r_LabelMinecraftDirectory}" Margin="10,135,10,0" VerticalAlignment="Top"/>
-        <Expander x:Name="ExpanderExtendedOptions" Header="{DynamicResource r_ExpanderExtendedOptions}" Height="35" Margin="10,188,10,0" VerticalAlignment="Top" Expanded="ExpanderExtendedOptions_Expanded" Collapsed="ExpanderExtendedOptions_Collapsed">
-            <Grid Background="#FFE5E5E5">
-                <CheckBox x:Name="CheckBoxCustomVersionId" Content="{DynamicResource r_CheckBoxCustomVersionId}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,10,0" Width="300" Unchecked="CheckBoxCustomVersionId_CheckChanged" Checked="CheckBoxCustomVersionId_CheckChanged"/>
-                <TextBox x:Name="TextBoxCustomVersionId" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="10,25,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
-                <CheckBox x:Name="CheckBoxCustomProfileName" Content="{DynamicResource r_CheckBoxCustomProfileName}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,55,10,0" Width="300" Unchecked="CheckBoxCustomProfileName_CheckChanged" Checked="CheckBoxCustomProfileName_CheckChanged"/>
-                <TextBox x:Name="TextBoxCustomProfileName" IsEnabled="False" Text="forge" HorizontalAlignment="Left" Height="23" Margin="10,75,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
-                <CheckBox x:Name="CheckBoxCustomJavaExecutable" Content="{DynamicResource r_CheckBoxCustomJavaExecutable}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,105,10,0" Width="300" Unchecked="CheckBoxCustomJavaExecutable_CheckChanged" Checked="CheckBoxCustomJavaExecutable_CheckChanged"/>
-                <TextBox x:Name="TextBoxCustomJavaExecutable" IsEnabled="False" Text="java" HorizontalAlignment="Left" Height="23" Margin="10,125,10,0" VerticalAlignment="Top" Width="300" MaxLines="1"/>
+
+        <Grid
+            Grid.Row="1"
+            Margin="10">
+            <Grid.Resources>
+                <Style
+                    TargetType="{x:Type Grid}">
+                    <Setter
+                        Property="Margin"
+                        Value="0,10,0,0"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="Auto"/>
+                <RowDefinition
+                    Height="Auto"/>
+                <RowDefinition
+                    Height="Auto"/>
+                <RowDefinition
+                    Height="Auto"/>
+                <RowDefinition
+                    Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Text="{DynamicResource r_LabelIntro}"
+                Height="32"
+                TextWrapping="Wrap"
+                TextAlignment="Center"/>
+
+            <Grid
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition
+                        Height="5"/>
+                    <RowDefinition/>
+                    <RowDefinition
+                        Height="5"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <CheckBox
+                    Grid.Row="0"
+                    x:Name="CheckBoxDisplayOnlyRecommended"
+                    Content="{DynamicResource r_CheckBoxDisplayOnlyRecommended}"/>
+                <ComboBox
+                    Grid.Row="2"
+                    x:Name="СomboBoxPromo"/>
+                <ComboBox
+                    Grid.Row="4"
+                    x:Name="ComboBoxForgeVersions"
+                    SelectionChanged="ComboBoxForgeVersions_SelectionChanged"/>
             </Grid>
-        </Expander>
-        <Button x:Name="ButtonInstall" Content="{DynamicResource r_ButtonInstall}" Margin="10,0,10,10" Height="32" VerticalAlignment="Bottom" Click="ButtonInstall_Click"/>
+
+            <Grid
+                Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Content="{DynamicResource r_LabelMinecraftDirectory}"/>
+                <Grid
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition
+                            Width="4*"/>
+                        <ColumnDefinition
+                            Width="5"/>
+                        <ColumnDefinition
+                            Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="TextBoxPath"
+                        Grid.Column="0"
+                        Height="22"
+                        MaxLines="1"/>
+                    <Button
+                        Grid.Column="2"
+                        Content="..."
+                        Height="22"
+                        Click="ButtonBrowse_Click"
+                        HorizontalAlignment="Stretch"/>
+                </Grid>
+            </Grid>
+
+            <Grid
+                Grid.Row="3">
+                <Expander
+                    Header="{DynamicResource r_ExpanderExtendedOptions}">
+                    <Grid
+                        Background="#FFE5E5E5"
+                        Height="Auto">
+                        <Grid
+                            Margin="5,-5,5,5"
+                            Height="Auto">
+                            <Grid.Resources>
+                                <Style
+                                    TargetType="{x:Type Grid}">
+                                    <Setter
+                                        Property="Margin"
+                                        Value="0,10,0,0"/>
+                                </Style>
+                            </Grid.Resources>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition
+                                    Height="Auto"/>
+                                <RowDefinition
+                                    Height="Auto"/>
+                                <RowDefinition
+                                    Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid
+                                Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="5"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <CheckBox
+                                    x:Name="CheckBoxCustomVersionId"
+                                    Grid.Row="0"
+                                    Content="{DynamicResource r_CheckBoxCustomVersionId}"/>
+                                <TextBox
+                                    Grid.Row="2"
+                                    x:Name="TextBoxCustomVersionId"
+                                    IsEnabled="{Binding ElementName=CheckBoxCustomVersionId, Path=IsChecked}"
+                                    HorizontalAlignment="Stretch"
+                                    Height="22"
+                                    MaxLines="1"/>
+                            </Grid>
+                            <Grid
+                                Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="5"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <CheckBox
+                                    Grid.Row="0"
+                                    x:Name="CheckBoxCustomProfileName"
+                                    Content="{DynamicResource r_CheckBoxCustomProfileName}"/>
+                                <TextBox
+                                    Grid.Row="2"
+                                    x:Name="TextBoxCustomProfileName"
+                                    IsEnabled="{Binding ElementName=CheckBoxCustomProfileName, Path=IsChecked}"
+                                    Text="forge"
+                                    Height="22"
+                                    HorizontalAlignment="Stretch"
+                                    MaxLines="1"/>
+                            </Grid>
+                            <Grid
+                                Grid.Row="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                    <RowDefinition
+                                        Height="5"/>
+                                    <RowDefinition
+                                        Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <CheckBox
+                                    x:Name="CheckBoxCustomJavaExecutable"
+                                    Grid.Row="0"
+                                    Content="{DynamicResource r_CheckBoxCustomJavaExecutable}"/>
+                                <TextBox
+                                    x:Name="TextBoxCustomJavaExecutable"
+                                    Grid.Row="2"
+                                    IsEnabled="{Binding ElementName=CheckBoxCustomJavaExecutable, Path=IsChecked}"
+                                    Text="java"
+                                    Height="22"
+                                    HorizontalAlignment="Stretch"
+                                    MaxLines="1"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Expander>
+            </Grid>
+
+            <Grid
+                Grid.Row="4">
+                <Button
+                    x:Name="ButtonInstall"
+                    Content="{DynamicResource r_ButtonInstall}"
+                    Height="32"
+                    Click="ButtonInstall_Click"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
