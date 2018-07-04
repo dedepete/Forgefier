@@ -27,7 +27,16 @@
             TextWrapping="Wrap"
             IsReadOnly="True"
             IsUndoEnabled="False"
-            FontFamily="Consolas"/>
+            FontFamily="Consolas">
+            <TextBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem
+                        Command="ApplicationCommands.SelectAll"/>
+                    <MenuItem
+                        Command="ApplicationCommands.Copy"/>
+                </ContextMenu>
+            </TextBox.ContextMenu>
+        </TextBox>
         <ProgressBar
             x:Name="ProgressBar"
             Grid.Row="1"/>
