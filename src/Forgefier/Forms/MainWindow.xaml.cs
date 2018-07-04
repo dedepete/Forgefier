@@ -18,8 +18,6 @@ namespace Forgefier
             InitializeComponent();
             TextBoxPath.Text = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
                 ".minecraft");
-            TextBoxPath.Focus();
-            TextBoxPath.Select(TextBoxPath.Text.Length, 0);
 
             string[] languageCodes = {
                 "en", "ru-RU"
@@ -122,6 +120,11 @@ namespace Forgefier
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(@"https://github.com/dedepete/Forgefier");
+        }
+
+        private void Hyperlink_OnClick(object sender, RoutedEventArgs e)
+        {
+            Process.Start(_selectedMcForgeVersion?.ChangelogUrl);
         }
     }
 }

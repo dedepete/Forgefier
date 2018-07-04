@@ -36,8 +36,11 @@ namespace Forgefier
         }
         private JObject _jObjectBuild { get; set; }
 
-        public McForgeInstallationType InstallationMethod { get; set; }
+        public McForgeInstallationType InstallationMethod { get; private set; }
         public string DownloadUrl { get; private set; }
+
+        public string ChangelogUrl =>
+            $"https://files.minecraftforge.net/maven/net/minecraftforge/forge/{FullVersion}/forge-{FullVersion}-changelog.txt";
 
         public string VersionWithTag => Version + (Tag == null ? string.Empty : "-" + Tag);
 

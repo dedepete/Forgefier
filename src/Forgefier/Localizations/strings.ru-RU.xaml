@@ -14,6 +14,7 @@
     <v:String x:Key="r_ExpanderExtendedOptions">Расширенные настройки</v:String>
     
     <!-- Labels -->
+    <v:String x:Key="r_HyperlinkChangelog">(Список изменений)</v:String>
     <v:String x:Key="r_LabelIntro">Эта небольшая утилита поможет вам установить Minecraft Forge.</v:String>
     <v:String x:Key="r_LabelMinecraftDirectory">Директория Minecraft:</v:String>
 

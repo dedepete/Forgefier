@@ -14,6 +14,7 @@
     <v:String x:Key="r_ExpanderExtendedOptions">Extended options</v:String>
     
     <!-- Labels -->
+    <v:String x:Key="r_HyperlinkChangelog">(Changelog)</v:String>
     <v:String x:Key="r_LabelIntro">This small tool will help you to install Minecraft Forge.</v:String>
     <v:String x:Key="r_LabelMinecraftDirectory">Minecraft directory:</v:String>
 

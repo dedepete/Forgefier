@@ -61,7 +61,7 @@ namespace Forgefier
                                 list.Add(mcForgeVersion.McVersion, new List<McForgeVersion>());
                             }
 
-                            if (builds[$"{mcForgeVersion.Version.Revision}"] == null) {
+                            if (builds[mcForgeVersion.Version.Revision.ToString()] == null) {
                                 continue;
                             }
 
